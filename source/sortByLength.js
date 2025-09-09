@@ -2,7 +2,7 @@
 
 /**
  * Функция, сортирующая массив строк по длине, а при одинаковой длине - по алфавиту
- * @param {Array<String>} arr - массив строк для сортировки
+ * @param {string[]} array массив строк для сортировки
  * 
  * @example
  * // returns ["fig", "kiwi", "apple", "grape", "banana"]
@@ -12,17 +12,13 @@
  * // returns ["ant", "bat", "cat", "dog"]
  * sortByLength(["cat", "bat", "ant", "dog"]);
  * 
- * @returns {Array<String>} новый отсортированный массив строк
+ * @returns {string[]} новый отсортированный массив строк
  */
-
-function sortByLength(arr) {
-    const sortedArray = arr.slice();
-    sortedArray.sort((a, b) => {
-        const lengthDifference = a.length - b.length;
-        if (lengthDifference !== 0) {
-            return lengthDifference;
-        }
-        return a.localeCompare(b);
-    });
-    return sortedArray;
+const sortByLength = (array) => {
+    if (!Array.isArray(array)) {
+        throw new TypeError('Input must be an array');
+    }
+    return [...array].sort((a, b) =>
+        a.length - b.length || a.localeCompare(b)
+    );
 }
