@@ -8,6 +8,8 @@
  * // returns ["fig", "kiwi", "apple", "grape", "banana"]
  * sortByLength(["apple", "banana", "kiwi", "fig", "grape"]);
  * 
+ * @throws {TypeError} - был передан не массив строк
+ * 
  * @example  
  * // returns ["ant", "bat", "cat", "dog"]
  * sortByLength(["cat", "bat", "ant", "dog"]);
@@ -17,6 +19,9 @@
 const sortByLength = (array) => {
     if (!Array.isArray(array)) {
         throw new TypeError('Input must be an array');
+    }
+    if (!array.every(item => typeof item === 'string')) {
+        throw new TypeError('All array elements must be strings');
     }
     return [...array].sort((a, b) =>
         a.length - b.length || a.localeCompare(b)

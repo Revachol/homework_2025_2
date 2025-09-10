@@ -31,4 +31,50 @@ QUnit.module("Тестируем функцию sortByLength", function () {
             "Сначала короткие строки, при одинаковой длине - алфавитный порядок."
         );
     });
+
+    QUnit.test("Выбрасывает ошибку когда входной параметр не массив", function (assert) {
+        assert.throws(
+            () => sortByLength("not an array"),
+            "Должна быть ошибка для строки"
+        );
+
+        assert.throws(
+            () => sortByLength(123),
+            "Должна быть ошибка для числа"
+        );
+
+        assert.throws(
+            () => sortByLength({}),
+            "Должна быть ошибка для объекта"
+        );
+
+        assert.throws(
+            () => sortByLength(null),
+            "Должна быть ошибка для null"
+        );
+
+        assert.throws(
+            () => sortByLength(undefined),
+            "Должна быть ошибка для undefined"
+        );
+    });
+
+    QUnit.test("Выбрасывает ошибку когда массив содержит числа", function (assert) {
+        assert.throws(
+            () => sortByLength(["a", 2, "b"]),
+            "Должна быть ошибка для смешанного массива с числами"
+        );
+    });
+
+    QUnit.test("Выбрасывает ошибку когда массив содержит null или undefined", function (assert) {
+        assert.throws(
+            () => sortByLength([null, "text"]),
+            "Должна быть ошибка для массива с null"
+        );
+
+        assert.throws(
+            () => sortByLength([null, undefined, "text"]),
+            "Должна быть ошибка для массива с null и undefined"
+        );
+    });
 });
