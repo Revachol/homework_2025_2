@@ -20,10 +20,12 @@ const sortByLength = (array) => {
     if (!Array.isArray(array)) {
         throw new TypeError('Input must be an array');
     }
-    if (!array.every(item => typeof item === 'string')) {
+    
+    if (!array.every(item => typeof item === 'string' || item instanceof String)) {
         throw new TypeError('All array elements must be strings');
     }
+    
     return [...array].sort((a, b) =>
         a.length - b.length || a.localeCompare(b)
     );
-}
+};
